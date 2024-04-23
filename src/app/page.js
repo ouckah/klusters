@@ -81,8 +81,8 @@ export default function Home() {
           <article className="border rounded-lg p-4 flex flex-col items-center opacity-50">
             <h2 className="font-semibold text-xl">Pathfinding Algorithms</h2>
             <p className="text-md p-2">
-              Understand how algorithms like A* and Dijkstra's algorithm find
-              the shortest path. (Coming Soon)
+              Understand how algorithms like A* and Dijkstra&apos;s algorithm
+              find the shortest path. (Coming Soon)
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
