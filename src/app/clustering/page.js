@@ -9,6 +9,9 @@ function Clustering() {
         <header className="text-5xl font-bold p-5 text-center flex flex-col items-center">
           Clustering Algorithms
         </header>
+        <header className="text-4xl font-bold p-5 text-center">
+          K-Means Clustering
+        </header>
         <Graph />
       </div>
     </main>

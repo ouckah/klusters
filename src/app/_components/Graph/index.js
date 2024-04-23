@@ -180,12 +180,20 @@ export const Graph = () => {
         <span>{K}</span>
         {errorMessage && <div className="text-red-500">{errorMessage}</div>}
       </div>
-      <button onClick={regeneratePoints} style={{ marginTop: "20px" }}>
-        Regenerate Data
-      </button>
-      <button onClick={startKClusterProcess} style={{ marginTop: "20px" }}>
-        Start K-Cluster Process
-      </button>
+      <div className="flex flex-col md:flex-row gap-12">
+        <button
+          onClick={regeneratePoints}
+          className="mt-20 md:mt-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Regenerate Data
+        </button>
+        <button
+          onClick={startKClusterProcess}
+          className="my-20 md:my-0 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Start K-Cluster Process
+        </button>
+      </div>
     </>
   );
 };
