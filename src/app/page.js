@@ -30,65 +30,65 @@ export default function Home() {
             <h2 className="font-semibold text-xl">Data Structures</h2>
             <p className="text-md p-2">
               Explore fundamental data structures like Arrays, Linked Lists, and
-              Trees. (Coming Soon)
+              Trees.
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
               disabled
             >
-              Learn More
+              Coming Soon
             </button>
           </article>
           <article className="border rounded-lg p-4 flex flex-col items-center opacity-50">
             <h2 className="font-semibold text-xl">Sorting Algorithms</h2>
             <p className="text-md p-2">
               Explore a variety of sorting algorithms like Quick Sort, Merge
-              Sort, and Bubble Sort. (Coming Soon)
+              Sort, and Bubble Sort.
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
               disabled
             >
-              Learn More
+              Coming Soon
             </button>
           </article>
           <article className="border rounded-lg p-4 flex flex-col items-center opacity-50">
             <h2 className="font-semibold text-xl">Search Algorithms</h2>
             <p className="text-md p-2">
               Dive into search algorithms including Binary Search, Linear
-              Search, and more. (Coming Soon)
+              Search, and more.
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
               disabled
             >
-              Learn More
+              Coming Soon
             </button>
           </article>
           <article className="border rounded-lg p-4 flex flex-col items-center opacity-50">
             <h2 className="font-semibold text-xl">Graph Algorithms</h2>
             <p className="text-md p-2">
               Get to know graph algorithms including Depth First Search, Breadth
-              First Search, and more. (Coming Soon)
+              First Search, and more.
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
               disabled
             >
-              Learn More
+              Coming Soon
             </button>
           </article>
           <article className="border rounded-lg p-4 flex flex-col items-center opacity-50">
             <h2 className="font-semibold text-xl">Pathfinding Algorithms</h2>
             <p className="text-md p-2">
               Understand how algorithms like A* and Dijkstra&apos;s algorithm
-              find the shortest path. (Coming Soon)
+              find the shortest path.
             </p>
             <button
               className="mt-auto bg-gray-500 text-white font-bold py-2 px-4 rounded"
               disabled
             >
-              Learn More
+              Coming Soon
             </button>
           </article>
           <div className="col-span-full mt-8 text-center">
