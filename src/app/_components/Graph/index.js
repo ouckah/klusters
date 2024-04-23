@@ -12,7 +12,6 @@ import {
 import { k_clusters } from "@/app/_utils/math";
 
 export const Graph = () => {
-  const K = 3;
   const DEFAULT_COLOR = "#eeeeee";
   const COLORS = [
     "#FF5733",
@@ -24,12 +23,13 @@ export const Graph = () => {
     "#FF8333",
     "#8D33FF",
   ];
+  const [errorMessage, setErrorMessage] = useState("");
 
   {
     /* Graph Initialization */
   }
   const INITIAL_POINT_AMOUNT = 5;
-  const MAX_LENGTH = 500;
+  const MAX_LENGTH = 100;
   const generatePoints = () => {
     let points = [];
     for (let i = 0; i < INITIAL_POINT_AMOUNT - 1; i++) {
@@ -47,6 +47,9 @@ export const Graph = () => {
   const [points, setPoints] = useState(generatedPoints);
   const [clusters, setClusters] = useState([generatedPoints]);
 
+  const DEFAULT_K = 3;
+  const [K, setK] = useState(DEFAULT_K);
+
   {
     /* Point Logic */
   }
@@ -62,30 +65,50 @@ export const Graph = () => {
       });
       console.log("Point added:", newPoint);
     }
+
+    setErrorMessage("");
   };
 
   const removePoint = () => {
     setPoints((prevPoints) => {
       if (prevPoints.length > INITIAL_POINT_AMOUNT) {
+        const removedPoint = prevPoints[prevPoints.length - 1];
+        setClusters((prevClusters) => {
+          const updatedClusters = prevClusters.map((cluster) =>
+            cluster.filter((point) => point !== removedPoint)
+          );
+          return updatedClusters.filter((cluster) => cluster.length > 0);
+        });
         console.log("Last point removed");
         return prevPoints.slice(0, prevPoints.length - 1);
       }
       return prevPoints;
     });
+
+    setErrorMessage("");
   };
 
   const regeneratePoints = () => {
     const generatedPoints = generatePoints();
     setPoints(generatedPoints);
     setClusters([generatedPoints]);
+
+    setErrorMessage("");
   };
 
   {
     /* K-Cluster Process */
   }
   const startKClusterProcess = () => {
-    const clusters = k_clusters(points, K);
-    setClusters(clusters);
+    if (points.length < K) {
+      setErrorMessage(
+        `The amount of points (${points.length}) is less than K (${K}). Please add more points.`
+      );
+    } else {
+      const [clusters, centroids] = k_clusters(points, K);
+      setClusters(clusters);
+      setErrorMessage(""); // Clear any previous error message
+    }
   };
 
   {
@@ -104,8 +127,6 @@ export const Graph = () => {
       window.removeEventListener("keydown", handleUndo);
     };
   }, []);
-
-  console.log(clusters);
 
   {
     /* Render */
@@ -126,8 +147,8 @@ export const Graph = () => {
           className="select-none"
         >
           <CartesianGrid horizontal={false} vertical={false} />
-          <XAxis dataKey="x" range={[0, 500]} type="number" />
-          <YAxis dataKey="y" range={[0, 500]} type="number" />
+          <XAxis dataKey="x" range={[0, MAX_LENGTH]} type="number" />
+          <YAxis dataKey="y" range={[0, MAX_LENGTH]} type="number" />
           <Tooltip cursor={{ strokeDasharray: "3 3" }} />
           {clusters.length === 1 ? (
             <Scatter key={0} data={clusters[0]} fill={DEFAULT_COLOR} />
@@ -143,6 +164,22 @@ export const Graph = () => {
           )}
         </ScatterChart>
       </ResponsiveContainer>
+      <div
+        style={{ marginBottom: "20px" }}
+        className="flex flex-col justify-center items-center"
+      >
+        <label htmlFor="kValue">Select K Value: </label>
+        <input
+          id="kValue"
+          type="range"
+          min="2"
+          max="8"
+          value={K}
+          onChange={(e) => setK(Number(e.target.value))}
+        />
+        <span>{K}</span>
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+      </div>
       <button onClick={regeneratePoints} style={{ marginTop: "20px" }}>
         Regenerate Data
       </button>
