@@ -10,26 +10,52 @@ import {
 } from "recharts";
 
 export const Graph = () => {
-  const [data, setData] = useState([
-    { x: 100, y: 200, z: 200 },
-    { x: 120, y: 100, z: 260 },
-    { x: 170, y: 300, z: 400 },
-  ]);
+  {
+    /* Graph Initialization */
+  }
+  const INITIAL_POINT_AMOUNT = 4;
+  const generatePoints = () => {
+    let points = [];
+    for (let i = 0; i < INITIAL_POINT_AMOUNT; i++) {
+      let x = Math.floor(Math.random() * 501); // Generates a random number between 0 and 500
+      let y = Math.floor(Math.random() * 501); // Generates a random number between 0 and 500
+      points.push({ x, y });
+    }
+    return points;
+  };
 
+  const [points, setPoints] = useState(generatePoints);
+
+  {
+    /* Point Logic */
+  }
   const addPoint = (e) => {
     if (e) {
       const { xValue: x, yValue: y } = e;
       const newPoint = { x, y };
+
       // Assuming data1 is the dataset we want to add the point to
-      setData((prevData) => [...prevData, newPoint]);
+      setPoints((prevPoints) => [...prevPoints, newPoint]);
       console.log("Point added:", newPoint);
     }
   };
 
+  const removePoint = () => {
+    setPoints((prevPoints) => {
+      if (prevPoints.length > INITIAL_POINT_AMOUNT) {
+        console.log("Last point removed");
+        return prevPoints.slice(0, prevPoints.length - 1);
+      }
+      return prevPoints;
+    });
+  };
+
+  {
+    /* Undo Listener */
+  }
   const handleUndo = (e) => {
     if (e.ctrlKey && e.key === "z") {
-      setData((prevData) => prevData.slice(0, prevData.length - 1));
-      console.log("Last point removed");
+      removePoint();
     }
   };
 
@@ -41,25 +67,38 @@ export const Graph = () => {
     };
   }, []);
 
+  const regeneratePoints = () => {
+    setPoints(generatePoints());
+  };
+
+  {
+    /* Render */
+  }
   return (
-    <ResponsiveContainer width="100%" height={800}>
-      <ScatterChart
-        width={800}
-        height={800}
-        margin={{
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 20,
-        }}
-        onClick={addPoint}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="x" type="number" />
-        <YAxis dataKey="y" type="number" />
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-        <Scatter data={data} fill="#eeeeee" />
-      </ScatterChart>
-    </ResponsiveContainer>
+    <>
+      <ResponsiveContainer width="100%" height={800}>
+        <ScatterChart
+          width={800}
+          height={800}
+          margin={{
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 20,
+          }}
+          onClick={addPoint}
+          className="select-none"
+        >
+          <CartesianGrid horizontal={false} vertical={false} />
+          <XAxis dataKey="x" range={[0, 500]} type="number" />
+          <YAxis dataKey="y" range={[0, 500]} type="number" />
+          <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+          <Scatter data={points} fill="#eeeeee" />
+        </ScatterChart>
+      </ResponsiveContainer>
+      <button onClick={regeneratePoints} style={{ marginTop: "20px" }}>
+        Regenerate Data
+      </button>
+    </>
   );
 };
