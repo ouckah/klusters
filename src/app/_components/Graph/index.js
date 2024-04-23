@@ -9,22 +9,43 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+import { k_clusters } from "@/app/_utils/math";
+
 export const Graph = () => {
+  const K = 3;
+  const DEFAULT_COLOR = "#eeeeee";
+  const COLORS = [
+    "#FF5733",
+    "#33FF57",
+    "#3357FF",
+    "#FF33FB",
+    "#33FFF6",
+    "#F3FF33",
+    "#FF8333",
+    "#8D33FF",
+  ];
+
   {
     /* Graph Initialization */
   }
-  const INITIAL_POINT_AMOUNT = 4;
+  const INITIAL_POINT_AMOUNT = 5;
+  const MAX_LENGTH = 500;
   const generatePoints = () => {
     let points = [];
-    for (let i = 0; i < INITIAL_POINT_AMOUNT; i++) {
-      let x = Math.floor(Math.random() * 501); // Generates a random number between 0 and 500
-      let y = Math.floor(Math.random() * 501); // Generates a random number between 0 and 500
+    for (let i = 0; i < INITIAL_POINT_AMOUNT - 1; i++) {
+      let x = Math.floor(Math.random() * MAX_LENGTH + 1);
+      let y = Math.floor(Math.random() * MAX_LENGTH + 1);
       points.push({ x, y });
     }
+
+    // keeps the graph a set size
+    points.push({ x: MAX_LENGTH, y: MAX_LENGTH });
     return points;
   };
 
-  const [points, setPoints] = useState(generatePoints);
+  const generatedPoints = generatePoints();
+  const [points, setPoints] = useState(generatedPoints);
+  const [clusters, setClusters] = useState([generatedPoints]);
 
   {
     /* Point Logic */
@@ -34,8 +55,11 @@ export const Graph = () => {
       const { xValue: x, yValue: y } = e;
       const newPoint = { x, y };
 
-      // Assuming data1 is the dataset we want to add the point to
       setPoints((prevPoints) => [...prevPoints, newPoint]);
+      setClusters((prevClusters) => {
+        const firstCluster = [...prevClusters[0], newPoint];
+        return [firstCluster, ...prevClusters.slice(1)];
+      });
       console.log("Point added:", newPoint);
     }
   };
@@ -48,6 +72,20 @@ export const Graph = () => {
       }
       return prevPoints;
     });
+  };
+
+  const regeneratePoints = () => {
+    const generatedPoints = generatePoints();
+    setPoints(generatedPoints);
+    setClusters([generatedPoints]);
+  };
+
+  {
+    /* K-Cluster Process */
+  }
+  const startKClusterProcess = () => {
+    const clusters = k_clusters(points, K);
+    setClusters(clusters);
   };
 
   {
@@ -67,9 +105,7 @@ export const Graph = () => {
     };
   }, []);
 
-  const regeneratePoints = () => {
-    setPoints(generatePoints());
-  };
+  console.log(clusters);
 
   {
     /* Render */
@@ -93,11 +129,25 @@ export const Graph = () => {
           <XAxis dataKey="x" range={[0, 500]} type="number" />
           <YAxis dataKey="y" range={[0, 500]} type="number" />
           <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-          <Scatter data={points} fill="#eeeeee" />
+          {clusters.length === 1 ? (
+            <Scatter key={0} data={clusters[0]} fill={DEFAULT_COLOR} />
+          ) : (
+            clusters.map((cluster, index) => (
+              <Scatter
+                key={index}
+                data={cluster}
+                name={`Cluster ${index + 1}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))
+          )}
         </ScatterChart>
       </ResponsiveContainer>
       <button onClick={regeneratePoints} style={{ marginTop: "20px" }}>
         Regenerate Data
+      </button>
+      <button onClick={startKClusterProcess} style={{ marginTop: "20px" }}>
+        Start K-Cluster Process
       </button>
     </>
   );
