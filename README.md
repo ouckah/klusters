@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to Klusters, a Data Structures and Algorithms Visualization website! This platform is designed to help users understand and visualize a wide range of algorithms and data structures, starting with a focus on clustering algorithms like K-Means. It provides an interactive environment where users can engage with various algorithms through dynamic visualizations and hands-on interactions.
+Welcome to Klusters, a Data Structures and Algorithms Visualization website! This platform is designed to help users understand and visualize a wide range of algorithms and data structures, ranging from simple data structures like binary trees to clustering algorithms like K-Means. It provides an interactive environment where users can engage with various algorithms through dynamic visualizations and hands-on interactions.
 
 ## Features
 
