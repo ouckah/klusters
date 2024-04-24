@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# README for Algorithms and Data Structures Visualization
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Welcome to Klusters, a Data Structures and Algorithms Visualization website! This platform is designed to help users understand and visualize a wide range of algorithms and data structures, starting with a focus on clustering algorithms like K-Means. It provides an interactive environment where users can engage with various algorithms through dynamic visualizations and hands-on interactions.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Interactive Visualizations**: Engage with different algorithms and data structures through interactive graphs and visual aids.
+- **Wide Range of Topics**: From clustering algorithms to sorting and tree structures, explore a variety of computational concepts.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Navigate to the Website**: Open your preferred browser and go to the website's URL (here)[https://klusters.vercel.app/].
+2. **Choose an Algorithm**: Select an algorithm or data structure from the available list to learn more.
+3. **Interact and Learn**: Use the interactive features like adding points to graphs or manipulating data structures directly from your browser.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **React**: Utilized for crafting the interactive user interface.
+- **Tailwind CSS**: Employed for its utility-first approach to responsive design.
+- **D3.js**: Integrated in graph components for sophisticated, interactive visualizations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This is unfortunately a closed solo project, but will think about accepting contributions!
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is distributed under the MIT License. For more details, see the LICENSE file included with the source code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
+
+Dive into the world of algorithms and data structures with our interactive and educational platform!
