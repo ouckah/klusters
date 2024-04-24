@@ -11,7 +11,7 @@ Welcome to Klusters, a Data Structures and Algorithms Visualization website! Thi
 
 ## How to Use
 
-1. **Navigate to the Website**: Open your preferred browser and go to the website's URL (here)[https://klusters.vercel.app/].
+1. **Navigate to the Website**: Open your preferred browser and go to the website's URL [here](https://klusters.vercel.app/).
 2. **Choose an Algorithm**: Select an algorithm or data structure from the available list to learn more.
 3. **Interact and Learn**: Use the interactive features like adding points to graphs or manipulating data structures directly from your browser.
 
