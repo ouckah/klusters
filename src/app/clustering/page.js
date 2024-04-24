@@ -12,6 +12,7 @@ function Clustering() {
         <header className="text-4xl font-bold p-5 text-center">
           K-Means Clustering
         </header>
+        <p className="text-lg">Click to add points!</p>
         <Graph />
       </div>
     </main>
